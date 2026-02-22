@@ -1,10 +1,816 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-    <title>Daniel 的網站</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正義老友群 +2 | 文理書院學生組織</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2d3748;
+            --accent-color: #3182ce;
+            --light-color: #f7fafc;
+            --dark-color: #2d3748;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 導航欄 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo img {
+            margin-right: 25px; /* 控制圖片與文字之間的距離 */
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        /* 主視覺區 */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #4a5568 100%);
+            color: white;
+            padding: 160px 0 100px;
+            margin-top: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .code-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 14px 32px;
+            border-radius: var(--border-radius);
+            text-decoration: none !important; /* 確保有下劃線樣式 */
+            font-weight: 600;
+            margin-top: 20px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer !important; /* 強制顯示手形游標 */
+            position: relative;
+            z-index: 100; /* 確保在最上層 */
+        }
+
+        /* 確保按鈕在hover時有反應 */
+        .cta-button:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-decoration: none !important;
+        }
+        
+        /* 區塊通用樣式 */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+        
+        /* 關於我們 */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+        
+        /* 核心價值 */
+        .values {
+            background-color: var(--light-color);
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .value-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(49, 130, 206, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+        
+        .value-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        /* 活動展示 */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .activity-card {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            background-color: white;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .activity-img {
+            height: 200px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .activity-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .activity-card:hover .activity-img img {
+            transform: scale(1.05);
+        }
+        
+        .activity-content {
+            padding: 25px;
+        }
+        
+        .activity-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .activity-date {
+            display: inline-block;
+            background-color: rgba(49, 130, 206, 0.1);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        /* 聯絡我們 */
+        .contact {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .contact .section-title h2,
+        .contact .section-title p {
+            color: white;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .contact-item {
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .contact-item h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        /* 頁尾 */
+        footer {
+            background-color: var(--secondary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .footer-logo .logo {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-links h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 140px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .code-badge {
+                font-size: 0.9rem;
+                padding: 6px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>我的 GitHub Pages 網站</h1>
-    <p>成功上線了！🎉</p>
+    <!-- 導航欄 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="C:\Users\lamlo\OneDrive\桌面\temp\;logo1.PNG" width="70" height="70">
+                    <span>正義老友群 +2</span>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">首頁</a></li>
+                    <li><a href="#about">關於我們</a></li>
+                    <li><a href="#values">核心價值</a></li>
+                    <li><a href="#activities">活動展示</a></li>
+                    <li><a href="#contact">聯絡我們</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主視覺區 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>文理書院(香港)「正義老友群」</h1>
+            <p>我們是文理書院非官方學生組織，致力於在校園內推廣極致的正義、實行正義舉措及正義行刑。透過多元正義，我們希望鼓勵同學積極平反校園的各種不義及不公，共締正義校園。</p>
+            <div class="code-badge">組織精神:正義</div>
+            <br>
+            <a href="https://youtu.be/dQw4w9WgXcQ?si=sl2GUaGpZs2PS3cy" 
+                class="cta-button" 
+                target="_blank" 
+                rel="noopener noreferrer">
+                了解更多
+            </a>
+        </div>
+    </section>
+
+    <!-- 關於我們 -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>關於我們</h2>
+                <p>「正義老友群」成立於2023年，由一群限量的文理書院學生發起。我們相信過高的溫度為學校帶來壓強改變。</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>畢業在即，我們的感想與願景</h3>
+                    <p>今天，我們距離畢業不足兩個月，即將迎來畢業的時刻。當我們收好課本、拿起籃球，腦海中浮現的不僅是一本又一本沒看過的SBA書籍、一張張未完成的past paper，更是這幾年裡，那些潘兆祺的肉搏聲、那些李璟希與女仔合照(有人找李)的時刻、那些張崇銘假笑的聲音、那些溫于朗被張虐待的豬叫聲、那些周錦權被校長叫的一聲聲「阿仔」，那些熊珈御恥笑何逸懿的狂妄笑聲，無數打籃球被關sir逮個正著的時刻。
+                    <p>我們之間的情誼，並非說出來的，而是點點滴滴積攢起來的。班際籃球賽沒有捧起過總冠軍，但我們捧起了堅如磐石的紅黑簿，捧起了一堆「可惜」的past paper；是凌晨三點的群組裡，還在為食大快活定KFC而爭執不休的對話記錄。</p>
+
+我們見過彼此最狼狽的樣子，也見過彼此眼中閃著聖光的模樣。這些看似平凡的片段，像一塊塊拼圖，拼出了我們獨一無二的青春圖景。
+
+離別在即，未來我們或許會散落在香港大學、香港中文大學、香港科技大學、香港理工大學、香港城市大學、香港浸會大學、嶺南大學或香港教育大學，走向不同的道路。但請相信，那些共同奮鬥過的熱血、那些無需言語的正義，早已成為我們生命中的一部分。它們不會被時間帶走，只會在記憶裡愈發清晰。
+
+                    </p>願我們永遠記得此刻的自己——
+正義、熱烈，擁有敢考試不溫習的勇氣，更有並肩作戰的鬥志。
+
+前路漫漫，願我們各自閃耀，更高處再相逢。</p>
+                   
+                    <a href="#contact" class="cta-button">加入我們</a>
+                </div>
+                <div class="about-image">
+                    <img src="C:\Users\lamlo\OneDrive\桌面\temp\IMG_5940.JPG" alt="正義老友群 +2 團隊討論">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心價值 -->
+    <section class="values" id="values">
+        <div class="container">
+            <div class="section-title">
+                <h2>核心價值</h2>
+                <p>「正義老友群 +2」以四大核心價值為基礎，引導我們的所有活動與倡議。</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa-solid fa-basketball"></i>
+                    </div>
+                    <h3>籃球之神-CKK</h3>
+                    <p>文理書院籃球場的球童，致力於撿起每一顆球場上的籃球並將其保存。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa-solid fa-paintbrush"></i>
+                    </div>
+                    <h3>畫畫之神-CSM</h3>
+                    <p>文理書院美術界的領頭羊，致力於修讀BAFS而非視藝科，成為BAFS界的最強畫師。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <h3>正義之神-PSK</h3>
+                    <p>曾是文理書院最正直的棵竹子，致力於成為一個粗口成自然的人，但粗口無法遮掩在他內心燃燒的正直之焰。無論如何，他這棵竹子是文理書院這艘船的桅杆，支撐文理書院揚帆啟航。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa-solid fa-venus"></i>
+                    </div>
+                    <h3>少女殺手-LKH</h3>
+                    <p>文理書院的雌激素激發劑，無數少女為之動容並與他合照。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa-solid fa-bed"></i>
+                    </div>
+                    <h3>睡眠之神-WYL</h3>
+                    <p>文理書院最熟悉晝夜節律誘發之無意識態的人，進入無意識態頻率為世界之最，是無意識態界的佼佼者。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <h3>健身之神-HKY</h3>
+                    <p>文理書院手部腫瘤質量及體積最大的人，更是雄激素激發劑，路過的男同學均會感受到他肌肉的氣場而動彈不得。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 活動展示 -->
+    <section id="activities">
+        <div class="container">
+            <div class="section-title">
+                <h2>活動展示</h2>
+                <p>我們定期舉辦團康活動，增進成員之間的感情。</p>
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-img">
+                        <img src="C:\Users\lamlo\OneDrive\桌面\temp\IMG_1806.png" alt="Love among members">
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-date">2023-2026年</div>
+                        <h3>愛·正義之友</h3>
+                        <p>定期邀請群內各成員，組織愛·正義遊樂團活動，探討世界各地不同的景點。組織成立超過800天，舉辦超過20次團隊活動，其中包括「老友遊祖國」、「老友遊祥州」等精彩活動，有效鞏固團內關係。</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-img">
+                        <img src="C:\Users\lamlo\OneDrive\桌面\temp\IMG_1792.png" alt="Team Activity">
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-date">2023年10月</div>
+                        <h3>「老友遊海洋公園」</h3>
+                        <p>是次活動為創群以來為數不多全員均有出席的團體活動，活動過程中有趣事情百出，所攝錄的影片精華仍為「CTA VII老友出遊紀念影片」貢獻大量素材。</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-img">
+                        <img src="C:\Users\lamlo\OneDrive\桌面\temp\IMG_3197.png" alt="Team Party">
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-date">2025年11月</div>
+                        <h3>「老友遊珠海之長隆大冒險」</h3>
+                        <p>是次活動提供一個機會讓成員在2天的行程中互相照顧，亦是創群以來成員之間公認最愉快的活動之一。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡我們 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>聯絡我們</h2>
+                <p>歡迎有興趣的同學加入「正義老友群 +2」，或與我們合作舉辦活動。</p>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>電子郵件</h3>
+                    <p>plus2oldfriend@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h3>學校地址</h3>
+                    <p>文理大書院<br>121室 正義老友群</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>成立時間</h3>
+                    <p>2023年11月6日下午6:00<br></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>正義老友群 +2</span>
+                    </div>
+                    <p>文理書院學生組織，致力於推廣校園公平正義與社會關懷。我們相信青年學子有能力為社會帶來正向改變。</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速連結</h3>
+                    <ul>
+                        <li><a href="#home">首頁</a></li>
+                        <li><a href="#about">關於我們</a></li>
+                        <li><a href="#values">核心價值</a></li>
+                        <li><a href="#activities">活動展示</a></li>
+                        <li><a href="#contact">聯絡我們</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>社交媒體</h3>
+                    <ul>
+                        <li><a href="https://www.instagram.com/plus2.oldfriend_page?igsh=b3RwNG9qcTc1bGxz&utm_source=qr"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2020-2026 文理書院「正義老友群」學生組織。保留所有權利。</p>
+                <p>組織精神:正義 | 建立公平正義的校園與社會</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 手機菜單切換
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // 切換菜單圖標
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // 點擊鏈接後關閉手機菜單
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // 平滑滾動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 滾動時改變導航欄樣式
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.08)';
+            }
+        });
+    </script>
 </body>
 </html>
