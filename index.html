@@ -469,40 +469,38 @@
         }
         
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            /* 原來的導航欄樣式保留... */
+
+            /* 關於我們區塊優化 */
+            .about-content {
+                gap: 30px; /* 減少圖片與文字的間距 */
             }
-            
-            .nav-links.active {
-                display: flex;
+
+            .about-text {
+                padding: 0 15px; /* 左右加內邊距，讓文字不會貼邊 */
+                text-align: justify; /* 文字左右對齊，更整齊 */
             }
-            
-            .nav-links li {
-                margin: 10px 0;
+
+            .about-text h3 {
+                font-size: 1.5rem; /* 標題稍微縮小 */
+                text-align: center; /* 手機上置中對齊 */
             }
-            
-            .mobile-menu-btn {
-                display: block;
+
+            .about-text p {
+                font-size: 1rem; /* 段落字體稍調小，閱讀更舒適 */
+                line-height: 1.7; /* 增加行高 */
+                margin-bottom: 20px;
             }
-            
-            .hero h1 {
-                font-size: 2.2rem;
+
+            .about-image {
+                max-width: 90%; /* 圖片不超過容器寬度90% */
+                margin: 0 auto; /* 置中 */
             }
-            
-            section {
-                padding: 80px 0;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
+
+            /* 如果圖片本身太大，可以限制高度 */
+            .about-image img {
+                max-height: 300px;
+                object-fit: cover; /* 保持比例裁切，避免變形 */
             }
         }
         
