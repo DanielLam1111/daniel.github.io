@@ -470,34 +470,52 @@
         }
         
         @media (max-width: 768px) {
-            /* ... 其他樣式 ... */
-        
-            /* 關於我們 – 手機版改為上下排列 */
-            .about-content {
-                flex-direction: column;  /* 改為垂直 */
-                gap: 30px;
-            }
-        
-            .about-text {
-                flex: none;              /* 取消彈性伸縮 */
-                width: 100%;             /* 文字區塊滿寬 */
-                padding: 0;
-            }
-        
-            .about-image {
-                flex: none;
-                width: 100%;             /* 圖片區塊滿寬 */
-                max-width: 400px;        /* 可選：限制圖片最大寬度 */
-                margin: 0 auto;          /* 圖片置中 */
-            }
-        
-            .about-image img {
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-            }
-        }
-                        
+    /* 導覽列相關樣式（唔好改！） */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: white;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    /* 只係改呢度：關於我們感想部分 — 恢復上下排列 */
+    .about-content {
+        flex-direction: column;   /* 改返做垂直 */
+        align-items: center;
+        gap: 30px;
+    }
+
+    .about-text {
+        width: 100%;              /* 文字滿版 */
+        padding: 0 10px;
+    }
+
+    .about-image {
+        width: 100%;
+        max-width: 400px;         /* 可選：限制圖片最大寬度 */
+        margin: 0 auto;
+    }
+
+    .about-image img {
+        width: 100%;
+        height: auto;
+    }
+}
         @media (max-width: 576px) {
             .hero {
                 padding: 140px 0 80px;
