@@ -460,9 +460,10 @@
         /* 響應式設計 */
         @media (max-width: 992px) {
             .about-content {
-                flex-direction: column;
+                flex-direction: row;      /* 改為橫向 */
+                flex-wrap: wrap;          /* 太窄時換行 */
+                gap: 20px;                /* 統一間距 */
             }
-            
             .hero h1 {
                 font-size: 2.8rem;
             }
