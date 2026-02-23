@@ -470,39 +470,29 @@
         }
         
         @media (max-width: 768px) {
-            /* ... 其他樣式 ... */
-
-            .about-content {
-                flex-direction: row;      /* 保持橫向 */
-                flex-wrap: nowrap;        /* 禁止換行 */
-                gap: 15px;                /* 稍微減少間距 */
-            }
-
-            .about-text {
-                flex: 1;                  /* 彈性佔滿剩餘空間 */
-                min-width: 0;              /* 允許內容壓縮 */
-                padding: 0 5px;
-            }
-
-            .about-image {
-                flex: 1;                  /* 與文字各佔一半 */
-                min-width: 0;              /* 允許壓縮 */
-                max-width: 50%;            /* 限制最大寬度一半 */
-                margin: 0;
-            }
-
-            .about-image img {
+            .nav-links {
+                display: none;              /* 預設隱藏選單 */
+                flex-direction: column;     /* 垂直排列 */
                 width: 100%;
-                height: auto;
-                object-fit: cover;         /* 改為 cover 避免變形 */
+                background-color: white;
+                position: absolute;
+                top: 80px;                  /* 喺 header 下面顯示 */
+                left: 0;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             }
-
-            /* 可選：調整文字大小讓手機上更好讀 */
-            .about-text h3 {
-                font-size: 1.3rem;
+        
+            .nav-links.active {
+                display: flex;              /* 點擊按钮後顯示 */
             }
-            .about-text p {
-                font-size: 0.95rem;
+        
+            .nav-links li {
+                margin: 10px 0;             /* 每個選項上下間距 */
+                text-align: center;
+            }
+        
+            .mobile-menu-btn {
+                display: block;             /* 顯示漢堡按钮 */
             }
         }
                         
