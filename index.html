@@ -470,46 +470,42 @@
         }
         
         @media (max-width: 768px) {
-            /* 原來的導航欄樣式保留... */
+            /* ... 其他樣式 ... */
 
-            /* 關於我們區塊－橫向排列（不強制變直） */
             .about-content {
-                flex-direction: row; /* 保持橫向 */
-                flex-wrap: wrap; /* 如果真的太窄，才自動換行 */
-                gap: 20px;
+                flex-direction: row;      /* 保持橫向 */
+                flex-wrap: nowrap;        /* 禁止換行 */
+                gap: 15px;                /* 稍微減少間距 */
             }
 
             .about-text {
-                flex: 1 1 300px; /* 文字區塊最小寬度300px，不夠寬才換行 */
-                padding: 0 10px;
-                text-align: left; /* 還原左對齊 */
-            }
-
-            .about-text h3 {
-                font-size: 1.6rem; /* 稍微縮小但保持醒目 */
-                text-align: left; /* 左對齊 */
-            }
-
-            .about-text p {
-                font-size: 1rem;
-                line-height: 1.6;
-                text-align: left; /* 左對齊，不是左右對齊 */
+                flex: 1;                  /* 彈性佔滿剩餘空間 */
+                min-width: 0;              /* 允許內容壓縮 */
+                padding: 0 5px;
             }
 
             .about-image {
-                flex: 1 1 280px; /* 圖片區塊最小寬度280px */
-                max-width: 100%;
-                margin: 0; /* 還原置中 */
+                flex: 1;                  /* 與文字各佔一半 */
+                min-width: 0;              /* 允許壓縮 */
+                max-width: 50%;            /* 限制最大寬度一半 */
+                margin: 0;
             }
 
             .about-image img {
                 width: 100%;
                 height: auto;
-                max-height: none; /* 移除高度限制 */
-                object-fit: contain; /* 確保完整顯示 */
+                object-fit: cover;         /* 改為 cover 避免變形 */
+            }
+
+            /* 可選：調整文字大小讓手機上更好讀 */
+            .about-text h3 {
+                font-size: 1.3rem;
+            }
+            .about-text p {
+                font-size: 0.95rem;
             }
         }
-                
+                        
         @media (max-width: 576px) {
             .hero {
                 padding: 140px 0 80px;
