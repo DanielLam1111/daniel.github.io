@@ -168,17 +168,16 @@
             color: white;
             padding: 14px 32px;
             border-radius: var(--border-radius);
-            text-decoration: none !important; /* 確保有下劃線樣式 */
+            text-decoration: none !important;
             font-weight: 600;
             margin-top: 20px;
             transition: var(--transition);
             border: none;
-            cursor: pointer !important; /* 強制顯示手形游標 */
+            cursor: pointer !important;
             position: relative;
-            z-index: 100; /* 確保在最上層 */
+            z-index: 100;
         }
 
-        /* 確保按鈕在hover時有反應 */
         .cta-button:hover {
             background-color: #2b6cb0;
             transform: translateY(-3px);
@@ -530,6 +529,44 @@
                 padding: 6px 15px;
             }
         }
+
+        /* ===== 新增滾動動畫樣式 ===== */
+        /* 初始狀態：透明並稍微向下偏移 */
+        .section-title,
+        .about-content,
+        .value-card,
+        .activity-card,
+        .contact-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        /* 當元素進入視窗時，加上這個 class */
+        .section-title.visible,
+        .about-content.visible,
+        .value-card.visible,
+        .activity-card.visible,
+        .contact-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 為不同卡片添加延遲，讓效果更有層次 */
+        .value-card.visible:nth-child(1) { transition-delay: 0.1s; }
+        .value-card.visible:nth-child(2) { transition-delay: 0.2s; }
+        .value-card.visible:nth-child(3) { transition-delay: 0.3s; }
+        .value-card.visible:nth-child(4) { transition-delay: 0.4s; }
+        .value-card.visible:nth-child(5) { transition-delay: 0.5s; }
+        .value-card.visible:nth-child(6) { transition-delay: 0.6s; }
+
+        .activity-card.visible:nth-child(1) { transition-delay: 0.1s; }
+        .activity-card.visible:nth-child(2) { transition-delay: 0.2s; }
+        .activity-card.visible:nth-child(3) { transition-delay: 0.3s; }
+
+        .contact-item.visible:nth-child(1) { transition-delay: 0.1s; }
+        .contact-item.visible:nth-child(2) { transition-delay: 0.2s; }
+        .contact-item.visible:nth-child(3) { transition-delay: 0.3s; }
     </style>
 </head>
 <body>
@@ -821,6 +858,19 @@
                 header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.08)';
             }
         });
+
+        // ===== 新增：滾動觸發動畫 (Intersection Observer) =====
+        const animatedElements = document.querySelectorAll('.section-title, .about-content, .value-card, .activity-card, .contact-item');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 }); // 當元素 20% 進入視窗時觸發
+
+        animatedElements.forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
