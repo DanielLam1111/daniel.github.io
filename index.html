@@ -31,43 +31,13 @@
             position: relative;
         }
 
-        /* 背景微動態：網格與光點 */
+        /* 移除所有藍色背景網格與光點 */
         body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(49, 130, 206, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(49, 130, 206, 0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: -1;
-            animation: gridMove 20s linear infinite;
+            display: none;
         }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* 浮動光點 */
         .floating-dots {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        .dot {
-            position: absolute;
-            width: 6px; height: 6px;
-            background: rgba(49, 130, 206, 0.2);
-            border-radius: 50%;
-            animation: float 8s infinite ease-in-out;
-        }
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+            display: none;
         }
 
         .container {
@@ -621,29 +591,28 @@
         }
         
         @media (max-width: 768px) {
+            /* 導航選單 */
             .nav-links {
-                display: flex;                  /* 改為 flex 以便排列 */
+                display: flex;
                 flex-direction: column;
                 width: 100%;
                 background: rgba(255, 255, 255, 0.95);
                 backdrop-filter: blur(10px);
                 position: absolute;
-                top: 100%;                      /* 緊貼 header 底部 */
+                top: 100%;
                 left: 0;
                 padding: 20px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
                 opacity: 0;
                 visibility: hidden;
-                transform: translateY(-10px);    /* 初始向上微移 */
+                transform: translateY(-10px);
                 transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-                /* 移除原有的 display: none */
             }
         
             .nav-links.active {
                 opacity: 1;
                 visibility: visible;
-                transform: translateY(0);        /* 回到原位 */
-                /* 移除原有的 display: flex */
+                transform: translateY(0);
             }
         
             .nav-links li {
@@ -654,8 +623,27 @@
             .mobile-menu-btn {
                 display: block;
             }
-        
-            /* 其餘手機版樣式（如 about-content、hero 等）維持不變 */
+
+            /* 關於我們 – 手機版垂直排列 */
+            .about-content {
+                flex-direction: column !important;
+                align-items: center;
+                gap: 30px;
+            }
+            .about-text {
+                width: 100%;
+                padding: 0;
+            }
+            .about-image {
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            /* 主標題調整 */
+            .hero h1 {
+                font-size: 2.2rem;
+            }
         }
         @media (max-width: 576px) {
             .hero {
@@ -708,8 +696,7 @@
     </style>
 </head>
 <body>
-    <!-- 浮動裝飾點 -->
-    <div class="floating-dots" id="floatingDots"></div>
+    <!-- 移除浮動裝飾點 (完全刪除) -->
 
     <!-- 導航欄 -->
     <header>
@@ -945,20 +932,7 @@
     </footer>
 
     <script>
-        // 生成浮動光點
-        function createDots() {
-            const container = document.getElementById('floatingDots');
-            for (let i = 0; i < 30; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'dot';
-                dot.style.left = Math.random() * 100 + '%';
-                dot.style.top = Math.random() * 100 + '%';
-                dot.style.animationDelay = Math.random() * 5 + 's';
-                dot.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                container.appendChild(dot);
-            }
-        }
-        createDots();
+        // 移除浮動光點的生成程式碼
 
         // 手機菜單切換
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
