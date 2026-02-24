@@ -80,10 +80,11 @@
 
         .logo img {
             margin-right: 25px;
-            transition: transform 0.5s ease;
+            transition: transform 0.3s ease; /* 保留過渡，但移除旋轉 */
         }
+        /* 移除 logo 圖片旋轉效果 */
         .logo:hover img {
-            transform: rotate(360deg);
+            transform: none; /* 或改為其他 subtle 效果，例如 scale(1.05) */
         }
         
         .nav-links {
@@ -658,7 +659,7 @@
             }
         }
 
-        /* 滾動動畫強化 */
+        /* 滾動動畫：初始狀態 (隱藏 + 位移) */
         .section-title,
         .about-content,
         .value-card,
@@ -666,9 +667,11 @@
         .contact-item {
             opacity: 0;
             transform: translateY(30px) scale(0.95);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+            will-change: opacity, transform;
         }
 
+        /* 當元素進入視窗時 (visible class) */
         .section-title.visible,
         .about-content.visible,
         .value-card.visible,
@@ -678,7 +681,7 @@
             transform: translateY(0) scale(1);
         }
 
-        /* 卡片延遲 */
+        /* 卡片延遲（僅在進入時有效，離開時無延遲） */
         .value-card.visible:nth-child(1) { transition-delay: 0.05s; }
         .value-card.visible:nth-child(2) { transition-delay: 0.1s; }
         .value-card.visible:nth-child(3) { transition-delay: 0.15s; }
@@ -696,8 +699,6 @@
     </style>
 </head>
 <body>
-    <!-- 移除浮動裝飾點 (完全刪除) -->
-
     <!-- 導航欄 -->
     <header>
         <div class="container">
@@ -932,8 +933,6 @@
     </footer>
 
     <script>
-        // 移除浮動光點的生成程式碼
-
         // 手機菜單切換
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
@@ -977,15 +976,24 @@
                 : '0 2px 10px rgba(0, 0, 0, 0.08)';
         });
 
-        // Intersection Observer 觸發動畫
+        // Intersection Observer 實現「逐步展開/收回」
         const animatedElements = document.querySelectorAll('.section-title, .about-content, .value-card, .activity-card, .contact-item');
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // 元素進入視窗 → 加上 visible class
                     entry.target.classList.add('visible');
+                } else {
+                    // 元素離開視窗 → 移除 visible class（實現收回）
+                    entry.target.classList.remove('visible');
                 }
             });
-        }, { threshold: 0.2 });
+        }, { 
+            threshold: 0.2,        // 當元素 20% 進入視窗時觸發
+            rootMargin: "0px 0px -50px 0px"  // 可選：稍微調整觸發時機，讓動畫更流暢
+        });
+
         animatedElements.forEach(el => observer.observe(el));
     </script>
 </body>
